@@ -70,11 +70,13 @@ public class EnrollmentServiceImpl implements EnrollmentService {
             switch (field) {
                 case "courseId":
                     Long courseId = ((Number) value).longValue();
-                    enrollment.setCourse(courseRepository.findById(courseId).orElseThrow());
+                    enrollment.setCourse(courseRepository.findById(courseId)
+                            .orElseThrow(() -> new ResourceNotFoundException("Course", "courseId", String.valueOf(courseId))));
                     break;
                 case "studentId":
                     Long studentId = ((Number) value).longValue();
-                    enrollment.setStudent(studentRepository.findById(studentId).orElseThrow());
+                    enrollment.setStudent(studentRepository.findById(studentId)
+                            .orElseThrow(() -> new ResourceNotFoundException("Student", "studentId", String.valueOf(studentId))));
                     break;
                 default:
                     throw new IllegalArgumentException("Field not Supported");
