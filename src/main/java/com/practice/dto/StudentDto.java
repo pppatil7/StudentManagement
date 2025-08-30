@@ -22,6 +22,4 @@ public class StudentDto {
     private String studentEmail;
 
     private String studentAddress;
-
-    private List<CourseDto> courses;
 }

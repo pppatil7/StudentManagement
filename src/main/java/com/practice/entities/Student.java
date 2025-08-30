@@ -27,14 +27,6 @@ public class Student {
 
     private String studentAddress;
 
-    @ManyToMany
-    @JoinTable(
-            name = "student_course",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id")
-    )
-    private List<Course> courses;
-
     @OneToMany(mappedBy = "student")
     private List<Enrollment> enrollments;
 

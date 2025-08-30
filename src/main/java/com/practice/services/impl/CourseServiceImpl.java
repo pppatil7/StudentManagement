@@ -1,6 +1,5 @@
 package com.practice.services.impl;
 
-import com.practice.dto.ApiResponse;
 import com.practice.dto.CourseDto;
 import com.practice.dto.CreateCourseDto;
 import com.practice.entities.Course;

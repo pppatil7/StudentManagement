@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,7 +28,6 @@ public class StudentServiceImpl implements StudentService {
     public StudentDto createStudent(CreateStudentDto dto) {
         Student student = modelMapper.map(dto, Student.class);
         List<Long> courseIds = dto.getCourseIds();
-        student.setCourses(courseRepository.findAllById(courseIds));
         Student savedStudent = studentRepository.save(student);
         return modelMapper.map(savedStudent, StudentDto.class);
     }
@@ -53,10 +51,6 @@ public class StudentServiceImpl implements StudentService {
                     break;
                 case "studentAddress":
                     student.setStudentAddress((String) value);
-                    break;
-                case "courseIds":
-                    List<Long> courseIds = (List<Long>) value;
-                    student.setCourses(courseRepository.findAllById(courseIds));
                     break;
                 default:
                     throw new IllegalArgumentException("Field is not supported");
