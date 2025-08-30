@@ -1,6 +1,7 @@
 package com.practice.services;
 
 import com.practice.dto.CreateStudentDto;
+import com.practice.dto.EnrollmentDto;
 import com.practice.dto.StudentDto;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface StudentService {
     StudentDto getStudentByStudentId(Long studentId);
 
     List<StudentDto> getAllStudents();
+
+    List<EnrollmentDto> getEnrollmentsByStudentId(Long studentId);
 }

@@ -1,6 +1,7 @@
 package com.practice.controllers;
 
 import com.practice.dto.CreateStudentDto;
+import com.practice.dto.EnrollmentDto;
 import com.practice.dto.StudentDto;
 import com.practice.services.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,12 @@ public class StudentController {
     public ResponseEntity<List<StudentDto>> getAllStudents() {
         List<StudentDto> studentDtoList = studentService.getAllStudents();
         return ResponseEntity.ok(studentDtoList);
+    }
+
+    @GetMapping("students/{studentId}/enrollments")
+    public ResponseEntity<List<EnrollmentDto>> getEnrollmentsByStudentId(@PathVariable Long studentId) {
+        List<EnrollmentDto> enrollmentDtoList = studentService.getEnrollmentsByStudentId(studentId);
+        return ResponseEntity.ok(enrollmentDtoList);
     }
 
 

@@ -13,6 +13,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"student_id", "course_id"})
+        }
+)
 public class Enrollment {
 
     @Id

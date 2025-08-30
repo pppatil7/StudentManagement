@@ -37,6 +37,10 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student", "studentId", String.valueOf(studentId)));
 
+        if (enrollmentRepository.existsByCourseCourseIdAndStudentStudentId(courseId, studentId)) {
+            throw new IllegalArgumentException("Course Already Assigned to Student");
+        }
+
         Enrollment enrollment = new Enrollment();
         enrollment.setCourse(course);
         enrollment.setStudent(student);

@@ -1,10 +1,13 @@
 package com.practice.services.impl;
 
 import com.practice.dto.CreateStudentDto;
+import com.practice.dto.EnrollmentDto;
 import com.practice.dto.StudentDto;
+import com.practice.entities.Enrollment;
 import com.practice.entities.Student;
 import com.practice.exceptions.ResourceNotFoundException;
 import com.practice.repositories.CourseRepository;
+import com.practice.repositories.EnrollmentRepository;
 import com.practice.repositories.StudentRepository;
 import com.practice.services.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +24,12 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
 
-    private final ModelMapper modelMapper;
+    private final EnrollmentRepository enrollmentRepository;
+
     private final CourseRepository courseRepository;
+
+    private final ModelMapper modelMapper;
+
 
     @Override
     public StudentDto createStudent(CreateStudentDto dto) {
@@ -36,7 +43,6 @@ public class StudentServiceImpl implements StudentService {
     public StudentDto updatePartialStudent(Long studentId, Map<String, Object> updates) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student", "studentId", String.valueOf(studentId)));
-
 
         updates.forEach((field, value) -> {
             switch (field) {
@@ -73,5 +79,18 @@ public class StudentServiceImpl implements StudentService {
         List<StudentDto> studentDtoList = students.stream()
                 .map(student -> modelMapper.map(student, StudentDto.class)).collect(Collectors.toList());
         return studentDtoList;
+    }
+
+    @Override
+    public List<EnrollmentDto> getEnrollmentsByStudentId(Long studentId) {
+        if (!studentRepository.existsById(studentId)) {
+            throw new ResourceNotFoundException("Student", "studentId", String.valueOf(studentId));
+        }
+        List<Enrollment> enrollments = enrollmentRepository.findByStudentStudentId(studentId);
+
+        List<EnrollmentDto> enrollmentDtoList = enrollments.stream()
+                .map((enrollment) -> modelMapper.map(enrollment, EnrollmentDto.class)).collect(Collectors.toList());
+
+        return enrollmentDtoList;
     }
 }
