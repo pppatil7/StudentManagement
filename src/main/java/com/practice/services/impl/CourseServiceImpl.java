@@ -31,19 +31,19 @@ public class CourseServiceImpl implements CourseService {
         return modelMapper.map(savedCourse, CourseDto.class);
     }
 
-    @Transactional
-    @Override
-    public ApiResponse assignCourseToStudent(Long courseId, Long studentId) {
-        Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new ResourceNotFoundException("Course", "courseId", String.valueOf(courseId)));
-        Student student = studentRepository.findById(studentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Student", "studentId", String.valueOf(studentId)));
-        boolean isAlreadyAssigned = courseRepository.existsByCourseIdAndStudentsStudentId(courseId, studentId);
-        if (isAlreadyAssigned) {
-            throw new RuntimeException("Course Already assigned to Student");
-        }
-        student.getCourses().add(course);
-        course.getStudents().add(student); //bidirectional
-        return new ApiResponse("Course Assigned to Student Successfully", true);
-    }
+//    @Transactional
+//    @Override
+//    public ApiResponse assignCourseToStudent(Long courseId, Long studentId) {
+//        Course course = courseRepository.findById(courseId)
+//                .orElseThrow(() -> new ResourceNotFoundException("Course", "courseId", String.valueOf(courseId)));
+//        Student student = studentRepository.findById(studentId)
+//                .orElseThrow(() -> new ResourceNotFoundException("Student", "studentId", String.valueOf(studentId)));
+//        boolean isAlreadyAssigned = courseRepository.existsByCourseIdAndStudentsStudentId(courseId, studentId);
+//        if (isAlreadyAssigned) {
+//            throw new RuntimeException("Course Already assigned to Student");
+//        }
+//        student.getCourses().add(course);
+//        course.getStudents().add(student); //bidirectional
+//        return new ApiResponse("Course Assigned to Student Successfully", true);
+//    }
 }

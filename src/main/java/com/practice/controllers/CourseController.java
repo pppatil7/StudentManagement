@@ -22,10 +22,10 @@ public class CourseController {
         return new ResponseEntity<>(courseDto, HttpStatus.CREATED);
     }
 
-    @PutMapping("courses/{courseId}/students/{studentId}")
-    public ResponseEntity<ApiResponse> assignCourseToStudent(@PathVariable Long courseId, @PathVariable Long studentId) {
-        ApiResponse apiResponse = courseService.assignCourseToStudent(courseId, studentId);
-        return ResponseEntity.ok(apiResponse);
-    }
+//    @PutMapping("courses/{courseId}/students/{studentId}")
+//    public ResponseEntity<ApiResponse> assignCourseToStudent(@PathVariable Long courseId, @PathVariable Long studentId) {
+//        ApiResponse apiResponse = courseService.assignCourseToStudent(courseId, studentId);
+//        return ResponseEntity.ok(apiResponse);
+//    }
 
 }

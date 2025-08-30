@@ -8,5 +8,5 @@ public interface CourseService {
 
     CourseDto createCourse(CreateCourseDto dto);
 
-    ApiResponse assignCourseToStudent(Long courseId, Long studentId);
+//    ApiResponse assignCourseToStudent(Long courseId, Long studentId);
 }
