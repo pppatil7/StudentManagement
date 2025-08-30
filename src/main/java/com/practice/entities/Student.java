@@ -35,4 +35,7 @@ public class Student {
     )
     private List<Course> courses;
 
+    @OneToMany(mappedBy = "student")
+    private List<Enrollment> enrollments;
+
 }
