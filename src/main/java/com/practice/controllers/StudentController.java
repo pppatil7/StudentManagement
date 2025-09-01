@@ -49,5 +49,11 @@ public class StudentController {
         return ResponseEntity.ok(enrollmentDtoList);
     }
 
+    @GetMapping("courses/{courseId}/students")
+    public ResponseEntity<List<StudentDto>> getStudentsByCourseId(@PathVariable Long courseId) {
+        List<StudentDto> studentDtoList = studentService.getAllStudentsByCourseId(courseId);
+        return ResponseEntity.ok(studentDtoList);
+    }
+
 
 }

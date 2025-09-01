@@ -18,4 +18,6 @@ public interface StudentService {
     List<StudentDto> getAllStudents();
 
     List<EnrollmentDto> getEnrollmentsByStudentId(Long studentId);
+
+    List<StudentDto> getAllStudentsByCourseId(Long courseId);
 }

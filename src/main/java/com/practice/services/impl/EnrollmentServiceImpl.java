@@ -105,7 +105,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         List<Enrollment> enrollments = enrollmentRepository.findAll();
 
         List<EnrollmentDto> enrollmentDtoList = enrollments.stream()
-                .map((element) -> modelMapper.map(element, EnrollmentDto.class)).collect(Collectors.toList());
+                .map((enrollment) -> modelMapper.map(enrollment, EnrollmentDto.class)).collect(Collectors.toList());
 
         return enrollmentDtoList;
     }

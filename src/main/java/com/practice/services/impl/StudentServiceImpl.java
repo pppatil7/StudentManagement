@@ -34,7 +34,6 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentDto createStudent(CreateStudentDto dto) {
         Student student = modelMapper.map(dto, Student.class);
-        List<Long> courseIds = dto.getCourseIds();
         Student savedStudent = studentRepository.save(student);
         return modelMapper.map(savedStudent, StudentDto.class);
     }
@@ -92,5 +91,17 @@ public class StudentServiceImpl implements StudentService {
                 .map((enrollment) -> modelMapper.map(enrollment, EnrollmentDto.class)).collect(Collectors.toList());
 
         return enrollmentDtoList;
+    }
+
+    @Override
+    public List<StudentDto> getAllStudentsByCourseId(Long courseId) {
+        if (!courseRepository.existsById(courseId)) {
+            throw new ResourceNotFoundException("Course", "courseId", String.valueOf(courseId));
+        }
+        List<Student> students = studentRepository.findByEnrollmentsCourseCourseId(courseId);
+        List<StudentDto> studentDtoList = students.stream()
+                .map((student) -> modelMapper.map(student, StudentDto.class)).collect(Collectors.toList());
+
+        return studentDtoList;
     }
 }
