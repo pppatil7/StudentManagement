@@ -49,6 +49,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         enrollment.setCourse(course);
         enrollment.setStudent(student);
         enrollment.setEnrollmentDate(LocalDate.now());
+        enrollment.setActive(true);
 
         Enrollment savedEnrollment = enrollmentRepository.save(enrollment);
 
@@ -78,6 +79,9 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                     Long studentId = ((Number) value).longValue();
                     enrollment.setStudent(studentRepository.findById(studentId)
                             .orElseThrow(() -> new ResourceNotFoundException("Student", "studentId", String.valueOf(studentId))));
+                    break;
+                case "isActive":
+                    enrollment.setActive((Boolean) value);
                     break;
                 default:
                     throw new IllegalArgumentException("Field not Supported");
