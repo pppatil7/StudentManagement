@@ -41,6 +41,16 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         Student student = studentRepository.findById(dto.getStudentId())
                 .orElseThrow(() -> new ResourceNotFoundException("Student", "studentId", String.valueOf(dto.getStudentId())));
 
+        if (enrollmentRepository.existsByStudentStudentId(dto.getStudentId())) {
+            List<Enrollment> enrollments = enrollmentRepository.findByStudentStudentId(dto.getStudentId());
+            for (Enrollment enrollment : enrollments) {
+                if (enrollment.isActive()) {
+                    throw new IllegalArgumentException("Student Already actively present in Another Course");
+                }
+                break;
+            }
+        }
+
         if (enrollmentRepository.existsByCourseCourseIdAndStudentStudentId(dto.getCourseId(), dto.getStudentId())) {
             throw new IllegalArgumentException("Course Already Assigned to Student");
         }
@@ -107,5 +117,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
         return modelMapper.map(enrollment, EnrollmentDto.class);
     }
+
+
 
 }
