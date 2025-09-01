@@ -50,8 +50,14 @@ public class StudentController {
     }
 
     @GetMapping("courses/{courseId}/students")
-    public ResponseEntity<List<StudentDto>> getStudentsByCourseId(@PathVariable Long courseId) {
+    public ResponseEntity<List<StudentDto>> getAllStudentsByCourseId(@PathVariable Long courseId) {
         List<StudentDto> studentDtoList = studentService.getAllStudentsByCourseId(courseId);
+        return ResponseEntity.ok(studentDtoList);
+    }
+
+    @GetMapping("courses/{courseId}/students/active")
+    public ResponseEntity<List<StudentDto>> getActiveStudentsByCourseId(@PathVariable Long courseId) {
+        List<StudentDto> studentDtoList = studentService.getActiveStudentsByCourseId(courseId);
         return ResponseEntity.ok(studentDtoList);
     }
 
