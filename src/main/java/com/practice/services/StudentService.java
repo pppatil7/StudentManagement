@@ -1,5 +1,6 @@
 package com.practice.services;
 
+import com.practice.dto.ApiResponse;
 import com.practice.dto.CreateStudentDto;
 import com.practice.dto.EnrollmentDto;
 import com.practice.dto.StudentDto;
@@ -22,4 +23,6 @@ public interface StudentService {
     List<StudentDto> getAllStudentsByCourseId(Long courseId);
 
     List<StudentDto> getActiveStudentsByCourseId(Long courseId);
+
+    ApiResponse deleteStudentByStudentId(Long studentId);
 }

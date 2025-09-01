@@ -1,7 +1,6 @@
 package com.practice.repositories;
 
 import com.practice.entities.Enrollment;
-import com.practice.entities.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

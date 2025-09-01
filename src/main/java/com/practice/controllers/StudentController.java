@@ -1,5 +1,6 @@
 package com.practice.controllers;
 
+import com.practice.dto.ApiResponse;
 import com.practice.dto.CreateStudentDto;
 import com.practice.dto.EnrollmentDto;
 import com.practice.dto.StudentDto;
@@ -59,6 +60,12 @@ public class StudentController {
     public ResponseEntity<List<StudentDto>> getActiveStudentsByCourseId(@PathVariable Long courseId) {
         List<StudentDto> studentDtoList = studentService.getActiveStudentsByCourseId(courseId);
         return ResponseEntity.ok(studentDtoList);
+    }
+
+    @DeleteMapping("students/{studentId}")
+    public ResponseEntity<ApiResponse> deleteStudentByStudentId(@PathVariable Long studentId) {
+        ApiResponse apiResponse = studentService.deleteStudentByStudentId(studentId);
+        return ResponseEntity.ok(apiResponse);
     }
 
 

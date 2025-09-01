@@ -125,4 +125,14 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         enrollment.setActive(false);
         return new ApiResponse("DeEnrolled Student Successfully", true);
     }
+
+
+    @Override
+    public ApiResponse deleteEnrollmentByEnrollmentId(Long enrollmentId) {
+        Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Enrollment", "enrollmentId", String.valueOf(enrollmentId)));
+        enrollmentRepository.delete(enrollment);
+
+        return new ApiResponse("Enrollment Deleted Successfully", true);
+    }
 }

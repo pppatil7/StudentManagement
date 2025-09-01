@@ -1,5 +1,6 @@
 package com.practice.services.impl;
 
+import com.practice.dto.ApiResponse;
 import com.practice.dto.CreateStudentDto;
 import com.practice.dto.EnrollmentDto;
 import com.practice.dto.StudentDto;
@@ -115,5 +116,13 @@ public class StudentServiceImpl implements StudentService {
                 .map((student) -> modelMapper.map(student, StudentDto.class)).collect(Collectors.toList());
 
         return studentDtoList;
+    }
+
+    @Override
+    public ApiResponse deleteStudentByStudentId(Long studentId) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Student", "studentId", String.valueOf(studentId)));
+        studentRepository.delete(student);
+        return new ApiResponse("Student deleted successfully", true);
     }
 }

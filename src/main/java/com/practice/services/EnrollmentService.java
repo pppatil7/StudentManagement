@@ -19,4 +19,6 @@ public interface EnrollmentService {
 
     ApiResponse deEnrollStudentByCourseIdAndStudentId(CreateEnrollmentDto dto);
 
+    ApiResponse deleteEnrollmentByEnrollmentId(Long enrollmentId);
+
 }
