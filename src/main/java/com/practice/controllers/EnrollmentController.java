@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -28,6 +29,18 @@ public class EnrollmentController {
     public ResponseEntity<ApiResponse> updatePartialEnrollmentByEnrollmentId(@PathVariable Long enrollmentId, @RequestBody Map<String, Object> updates) {
         ApiResponse apiResponse = enrollmentService.updatePartialEnrollmentByEnrollmentId(enrollmentId, updates);
         return ResponseEntity.ok(apiResponse);
+    }
+
+    @GetMapping("enrollments")
+    public ResponseEntity<List<EnrollmentDto>> getAllEnrollments() {
+        List<EnrollmentDto> enrollmentDtoList = enrollmentService.getAllEnrollments();
+        return ResponseEntity.ok(enrollmentDtoList);
+    }
+
+    @GetMapping("enrollments/{enrollmentId}")
+    public ResponseEntity<EnrollmentDto> getEnrollmentNyEnrollmentId(@PathVariable Long enrollmentId) {
+        EnrollmentDto enrollmentDto = enrollmentService.getEnrollmentByEnrollmentId(enrollmentId);
+        return ResponseEntity.ok(enrollmentDto);
     }
 
 

@@ -17,7 +17,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +32,6 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     private final StudentRepository studentRepository;
 
     private final ModelMapper modelMapper;
-
 
     @Transactional
     @Override
@@ -84,4 +85,23 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         });
         return new ApiResponse("Enrollment Updated Successfully", true);
     }
+
+    @Override
+    public List<EnrollmentDto> getAllEnrollments() {
+        List<Enrollment> enrollments = enrollmentRepository.findAll();
+
+        List<EnrollmentDto> enrollmentDtoList = enrollments.stream()
+                .map((element) -> modelMapper.map(element, EnrollmentDto.class)).collect(Collectors.toList());
+
+        return enrollmentDtoList;
+    }
+
+    @Override
+    public EnrollmentDto getEnrollmentByEnrollmentId(Long enrollmentId) {
+        Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Enrollment", "enrollmentId", String.valueOf(enrollmentId)));
+
+        return modelMapper.map(enrollment, EnrollmentDto.class);
+    }
+
 }

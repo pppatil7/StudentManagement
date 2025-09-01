@@ -4,6 +4,7 @@ import com.practice.dto.ApiResponse;
 import com.practice.dto.CreateEnrollmentDto;
 import com.practice.dto.EnrollmentDto;
 
+import java.util.List;
 import java.util.Map;
 
 public interface EnrollmentService {
@@ -11,5 +12,9 @@ public interface EnrollmentService {
     EnrollmentDto createEnrollment(CreateEnrollmentDto dto);
 
     ApiResponse updatePartialEnrollmentByEnrollmentId(Long enrollmentId, Map<String, Object> updates);
+
+    List<EnrollmentDto> getAllEnrollments();
+
+    EnrollmentDto getEnrollmentByEnrollmentId(Long enrollmentId);
 
 }
