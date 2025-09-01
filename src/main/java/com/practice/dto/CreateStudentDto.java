@@ -20,6 +20,4 @@ public class CreateStudentDto {
     private String studentEmail;
 
     private String studentAddress;
-
-    private List<Long> courseIds;
 }
