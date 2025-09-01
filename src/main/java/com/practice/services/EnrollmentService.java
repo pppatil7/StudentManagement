@@ -17,4 +17,6 @@ public interface EnrollmentService {
 
     EnrollmentDto getEnrollmentByEnrollmentId(Long enrollmentId);
 
+    ApiResponse deEnrollStudentByCourseIdAndStudentId(CreateEnrollmentDto dto);
+
 }

@@ -43,5 +43,11 @@ public class EnrollmentController {
         return ResponseEntity.ok(enrollmentDto);
     }
 
+    @PutMapping("enrollments/de")
+    public ResponseEntity<ApiResponse> deEnrollStudentByCourseIdAndStudentId(@RequestBody CreateEnrollmentDto dto) {
+        ApiResponse apiResponse = enrollmentService.deEnrollStudentByCourseIdAndStudentId(dto);
+        return ResponseEntity.ok(apiResponse);
+    }
+
 
 }

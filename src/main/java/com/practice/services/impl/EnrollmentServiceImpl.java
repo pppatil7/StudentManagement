@@ -118,6 +118,11 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         return modelMapper.map(enrollment, EnrollmentDto.class);
     }
 
-
-
+    @Transactional
+    @Override
+    public ApiResponse deEnrollStudentByCourseIdAndStudentId(CreateEnrollmentDto dto) {
+        Enrollment enrollment = enrollmentRepository.findByCourseCourseIdAndStudentStudentId(dto.getCourseId(), dto.getStudentId());
+        enrollment.setActive(false);
+        return new ApiResponse("DeEnrolled Student Successfully", true);
+    }
 }
