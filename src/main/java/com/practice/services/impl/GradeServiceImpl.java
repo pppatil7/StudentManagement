@@ -30,19 +30,14 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public GradeDto createGrade(CreateGradeDto dto) {
-        Course course = courseRepository.findById(dto.getCourseId())
-                .orElseThrow(() -> new ResourceNotFoundException("Course", "courseId", String.valueOf(dto.getCourseId())));
         Student student = studentRepository.findById(dto.getStudentId())
                 .orElseThrow(() -> new ResourceNotFoundException("Student", "studentId", String.valueOf(dto.getStudentId())));
+        Course course = courseRepository.findByEnrollmentsStudentStudentIdAndEnrollmentsIsActiveTrue(dto.getStudentId());
 
-        //for particular course and student if courseSemesterNumber , appearedSemesterName stored already then throw exception
-
-        if (gradeRepository.existsByCourseCourseIdAndStudentStudentId(dto.getCourseId(), dto.getStudentId())) {
-            if (gradeRepository.existsByCourseSemesterNumberAndAppearedSemesterName(dto.getCourseSemesterNumber(),
-                    dto.getAppearedSemesterName())) {
-                throw new IllegalArgumentException("grades already stored");
-            }
+        if (course == null) {
+            throw new IllegalArgumentException("Student not actively enrolled to any course");
         }
+
 
         Grade grade = new Grade();
         grade.setCourse(course);
