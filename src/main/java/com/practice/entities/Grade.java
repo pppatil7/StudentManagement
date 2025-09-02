@@ -25,9 +25,9 @@ public class Grade {
     @JoinColumn(name = "student_id")
     private Student student;
 
-    private Integer studentSemesterNumber;
+    private Integer courseSemesterNumber;
 
-    private String semesterName;
+    private String appearedSemesterName;
 
     private Double percentage;
 
