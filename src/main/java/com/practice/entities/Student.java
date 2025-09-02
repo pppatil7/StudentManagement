@@ -27,7 +27,7 @@ public class Student {
 
     private String studentAddress;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Enrollment> enrollments;
 
 }

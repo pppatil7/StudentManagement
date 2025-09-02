@@ -25,7 +25,7 @@ public class Course {
 
     private Double courseFees;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Enrollment> enrollments;
 
 }
