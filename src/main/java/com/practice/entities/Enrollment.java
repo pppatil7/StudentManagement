@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -35,6 +36,9 @@ public class Enrollment {
     private Course course;
 
     private boolean isActive;
+
+    @OneToMany(mappedBy = "enrollment")
+    private List<Grade> grades;
 
 
 }

@@ -5,8 +5,6 @@ import com.practice.dto.GradeDto;
 
 public interface GradeService {
 
-
-    GradeDto createGrade(CreateGradeDto dto);
-
+    GradeDto addGradeByStudentId(Long studentId, CreateGradeDto dto);
 
 }

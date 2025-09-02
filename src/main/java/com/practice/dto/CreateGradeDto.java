@@ -11,8 +11,6 @@ import lombok.Setter;
 @Setter
 public class CreateGradeDto {
 
-    private Long studentId;
-
     private Integer courseSemesterNumber;
 
     private String appearedSemesterName;

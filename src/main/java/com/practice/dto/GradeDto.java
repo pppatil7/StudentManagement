@@ -13,9 +13,7 @@ public class GradeDto {
 
     private Long gradeId;
 
-    private CourseDto course;
-
-    private StudentDto student;
+    private EnrollmentDto enrollment;
 
     private Integer courseSemesterNumber;
 

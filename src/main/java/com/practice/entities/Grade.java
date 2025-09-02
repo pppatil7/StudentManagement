@@ -18,12 +18,8 @@ public class Grade {
     private Long gradeId;
 
     @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
-
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @JoinColumn(name = "enrollment_id")
+    private Enrollment enrollment;
 
     private Integer courseSemesterNumber;
 

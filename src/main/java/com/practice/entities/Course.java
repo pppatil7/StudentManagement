@@ -28,7 +28,4 @@ public class Course {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Enrollment> enrollments;
 
-    @OneToMany(mappedBy = "course")
-    private List<Grade> grades;
-
 }

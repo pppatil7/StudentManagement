@@ -5,10 +5,7 @@ import com.practice.dto.GradeDto;
 import com.practice.services.GradeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,10 +14,9 @@ public class GradeController {
 
     private final GradeService gradeService;
 
-
-    @PostMapping("courses/students/grades")
-    public ResponseEntity<GradeDto> createGrade(@RequestBody CreateGradeDto dto) {
-        GradeDto gradeDto = gradeService.createGrade(dto);
+    @PostMapping("students/{studentId}/grades")
+    public ResponseEntity<GradeDto> addGradeByStudentId(@PathVariable Long studentId, @RequestBody CreateGradeDto dto) {
+        GradeDto gradeDto = gradeService.addGradeByStudentId(studentId, dto);
         return ResponseEntity.ok(gradeDto);
     }
 
