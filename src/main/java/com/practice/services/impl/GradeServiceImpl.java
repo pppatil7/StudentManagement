@@ -38,6 +38,14 @@ public class GradeServiceImpl implements GradeService {
             throw new IllegalArgumentException("Student not actively enrolled to any course");
         }
 
+        //for particular course and student if courseSemesterNumber , appearedSemesterName stored already then throw exception
+
+        if (gradeRepository.existsByCourseCourseIdAndStudentStudentId(course.getCourseId(), dto.getStudentId())) {
+            if (gradeRepository.existsByCourseSemesterNumberAndAppearedSemesterName(dto.getCourseSemesterNumber(),
+                    dto.getAppearedSemesterName())) {
+                throw new IllegalArgumentException("grades already stored");
+            }
+        }
 
         Grade grade = new Grade();
         grade.setCourse(course);
