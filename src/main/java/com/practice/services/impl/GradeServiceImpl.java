@@ -49,9 +49,24 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public List<GradeDto> getGradesByStudentId(Long studentId) {
+        if (!studentRepository.existsById(studentId)) {
+            throw new ResourceNotFoundException("Student", "studentId", String.valueOf(studentId));
+        }
         List<Grade> grades = gradeRepository.findByEnrollmentStudentStudentId(studentId);
         List<GradeDto> gradeDtoList = grades.stream()
-                .map((element) -> modelMapper.map(element, GradeDto.class)).collect(Collectors.toList());
+                .map((grade) -> modelMapper.map(grade, GradeDto.class)).collect(Collectors.toList());
+        return gradeDtoList;
+    }
+
+    @Override
+    public List<GradeDto> getActiveCourseGradesByStudentId(Long studentId) {
+        if (!studentRepository.existsById(studentId)) {
+            throw new ResourceNotFoundException("Student", "studentId", String.valueOf(studentId));
+        }
+        List<Grade> grades = gradeRepository.findByEnrollmentStudentStudentIdAndEnrollmentIsActiveTrue(studentId);
+        List<GradeDto> gradeDtoList = grades.stream()
+                .map((grade) -> modelMapper.map(grade, GradeDto.class)).collect(Collectors.toList());
+
         return gradeDtoList;
     }
 }

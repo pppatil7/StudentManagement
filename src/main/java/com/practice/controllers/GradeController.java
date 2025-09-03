@@ -28,5 +28,11 @@ public class GradeController {
         return ResponseEntity.ok(gradeDtoList);
     }
 
+    @GetMapping("students/{studentId}/grades/active")
+    public ResponseEntity<List<GradeDto>> getActiveCourseGradesByStudentId(@PathVariable Long studentId) {
+        List<GradeDto> gradeDtoList = gradeService.getActiveCourseGradesByStudentId(studentId);
+        return ResponseEntity.ok(gradeDtoList);
+    }
+
 
 }

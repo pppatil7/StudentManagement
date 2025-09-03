@@ -9,5 +9,7 @@ public interface GradeRepository extends JpaRepository<Grade, Long> {
 
     List<Grade> findByEnrollmentStudentStudentId(Long studentId);
 
+    List<Grade> findByEnrollmentStudentStudentIdAndEnrollmentIsActiveTrue(Long studentId);
+
 
 }
