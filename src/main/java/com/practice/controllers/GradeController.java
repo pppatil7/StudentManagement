@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,6 +39,12 @@ public class GradeController {
     public ResponseEntity<List<GradeDto>> getActiveCourseGradesByCourseSemesterNumberAndStudentId(@PathVariable Long studentId, @PathVariable Long courseSemesterNumber) {
         List<GradeDto> gradeDtoList = gradeService.getActiveCourseGradesByStudentIdAndCourseSemesterNumber(studentId, courseSemesterNumber);
         return ResponseEntity.ok(gradeDtoList);
+    }
+
+    @PatchMapping("students/grades/{gradeId}")
+    public ResponseEntity<GradeDto> updatePartialGradeByGradeId(@PathVariable Long gradeId, @RequestBody Map<String, Object> updates) {
+        GradeDto gradeDto = gradeService.updatePartialGradeByGradeId(gradeId, updates);
+        return ResponseEntity.ok(gradeDto);
     }
 
 

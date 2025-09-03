@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -78,5 +79,36 @@ public class GradeServiceImpl implements GradeService {
                 .map((grade) -> modelMapper.map(grade, GradeDto.class)).collect(Collectors.toList());
 
         return gradeDtoList;
+    }
+
+
+    @Override
+    public GradeDto updatePartialGradeByGradeId(Long gradeId, Map<String, Object> updates) {
+        Grade grade = gradeRepository.findById(gradeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Grade", "gradeId", String.valueOf(gradeId)));
+
+        updates.forEach((field, value) -> {
+            switch (field) {
+                case "courseSemesterNumber":
+                    Integer courseSemesterNumber = ((Number) value).intValue();
+                    grade.setCourseSemesterNumber(courseSemesterNumber);
+                    break;
+                case "appearedSemesterName":
+                    grade.setAppearedSemesterName((String) value);
+                    break;
+                case "percentage":
+                    Double percentage = ((Number) value).doubleValue();
+                    grade.setPercentage(percentage);
+                    break;
+                case "resultStatus":
+                    grade.setResultStatus((String) value);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Field is not supported");
+            }
+        });
+        Grade savedGrade = gradeRepository.save(grade);
+
+        return modelMapper.map(savedGrade, GradeDto.class);
     }
 }
