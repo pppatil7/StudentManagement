@@ -13,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -44,5 +47,11 @@ public class GradeServiceImpl implements GradeService {
         return modelMapper.map(savedGrade, GradeDto.class);
     }
 
-
+    @Override
+    public List<GradeDto> getGradesByStudentId(Long studentId) {
+        List<Grade> grades = gradeRepository.findByEnrollmentStudentStudentId(studentId);
+        List<GradeDto> gradeDtoList = grades.stream()
+                .map((element) -> modelMapper.map(element, GradeDto.class)).collect(Collectors.toList());
+        return gradeDtoList;
+    }
 }
