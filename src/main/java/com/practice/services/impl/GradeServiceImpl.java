@@ -69,4 +69,14 @@ public class GradeServiceImpl implements GradeService {
 
         return gradeDtoList;
     }
+
+    @Override
+    public List<GradeDto> getActiveCourseGradesByStudentIdAndCourseSemesterNumber(Long studentId, Long courseSemesterNumber) {
+        List<Grade> grades = gradeRepository
+                .findByEnrollmentStudentStudentIdAndCourseSemesterNumberAndEnrollmentIsActiveTrue(studentId, courseSemesterNumber);
+        List<GradeDto> gradeDtoList = grades.stream()
+                .map((grade) -> modelMapper.map(grade, GradeDto.class)).collect(Collectors.toList());
+
+        return gradeDtoList;
+    }
 }

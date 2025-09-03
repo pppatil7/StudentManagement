@@ -13,4 +13,6 @@ public interface GradeService {
 
     List<GradeDto> getActiveCourseGradesByStudentId(Long studentId);
 
+    List<GradeDto> getActiveCourseGradesByStudentIdAndCourseSemesterNumber(Long studentId, Long courseSemesterNumber);
+
 }

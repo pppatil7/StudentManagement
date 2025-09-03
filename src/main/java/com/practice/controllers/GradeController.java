@@ -34,5 +34,11 @@ public class GradeController {
         return ResponseEntity.ok(gradeDtoList);
     }
 
+    @GetMapping("students/{studentId}/grades/active/{courseSemesterNumber}")
+    public ResponseEntity<List<GradeDto>> getActiveCourseGradesByCourseSemesterNumberAndStudentId(@PathVariable Long studentId, @PathVariable Long courseSemesterNumber) {
+        List<GradeDto> gradeDtoList = gradeService.getActiveCourseGradesByStudentIdAndCourseSemesterNumber(studentId, courseSemesterNumber);
+        return ResponseEntity.ok(gradeDtoList);
+    }
+
 
 }

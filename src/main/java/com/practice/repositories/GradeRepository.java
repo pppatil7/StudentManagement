@@ -11,5 +11,7 @@ public interface GradeRepository extends JpaRepository<Grade, Long> {
 
     List<Grade> findByEnrollmentStudentStudentIdAndEnrollmentIsActiveTrue(Long studentId);
 
+    List<Grade> findByEnrollmentStudentStudentIdAndCourseSemesterNumberAndEnrollmentIsActiveTrue(Long studentId, Long courseSemesterNumber);
+
 
 }
