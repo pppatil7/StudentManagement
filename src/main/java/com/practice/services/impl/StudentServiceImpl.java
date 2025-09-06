@@ -95,30 +95,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentDto> getAllStudentsByCourseId(Long courseId) {
-        if (!courseRepository.existsById(courseId)) {
-            throw new ResourceNotFoundException("Course", "courseId", String.valueOf(courseId));
-        }
-        List<Student> students = studentRepository.findByEnrollmentsCourseCourseId(courseId);
-        List<StudentDto> studentDtoList = students.stream()
-                .map((student) -> modelMapper.map(student, StudentDto.class)).collect(Collectors.toList());
-
-        return studentDtoList;
-    }
-
-    @Override
-    public List<StudentDto> getActiveStudentsByCourseId(Long courseId) {
-        if (!courseRepository.existsById(courseId)) {
-            throw new ResourceNotFoundException("Course", "courseId", String.valueOf(courseId));
-        }
-        List<Student> students = studentRepository.findByEnrollmentsCourseCourseIdAndEnrollmentsIsActiveTrue(courseId);
-        List<StudentDto> studentDtoList = students.stream()
-                .map((student) -> modelMapper.map(student, StudentDto.class)).collect(Collectors.toList());
-
-        return studentDtoList;
-    }
-
-    @Override
     public ApiResponse deleteStudentByStudentId(Long studentId) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student", "studentId", String.valueOf(studentId)));

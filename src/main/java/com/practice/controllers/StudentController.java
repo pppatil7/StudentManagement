@@ -50,17 +50,7 @@ public class StudentController {
         return ResponseEntity.ok(enrollmentDtoList);
     }
 
-    @GetMapping("courses/{courseId}/students")
-    public ResponseEntity<List<StudentDto>> getAllStudentsByCourseId(@PathVariable Long courseId) {
-        List<StudentDto> studentDtoList = studentService.getAllStudentsByCourseId(courseId);
-        return ResponseEntity.ok(studentDtoList);
-    }
 
-    @GetMapping("courses/{courseId}/students/active")
-    public ResponseEntity<List<StudentDto>> getActiveStudentsByCourseId(@PathVariable Long courseId) {
-        List<StudentDto> studentDtoList = studentService.getActiveStudentsByCourseId(courseId);
-        return ResponseEntity.ok(studentDtoList);
-    }
 
     @DeleteMapping("students/{studentId}")
     public ResponseEntity<ApiResponse> deleteStudentByStudentId(@PathVariable Long studentId) {
