@@ -50,8 +50,6 @@ public class StudentController {
         return ResponseEntity.ok(enrollmentDtoList);
     }
 
-
-
     @DeleteMapping("students/{studentId}")
     public ResponseEntity<ApiResponse> deleteStudentByStudentId(@PathVariable Long studentId) {
         ApiResponse apiResponse = studentService.deleteStudentByStudentId(studentId);
