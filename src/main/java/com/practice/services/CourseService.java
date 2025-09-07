@@ -10,6 +10,8 @@ public interface CourseService {
 
     CourseDto createCourse(CreateCourseDto dto);
 
+    List<CourseDto> getAllCourses();
+
     List<StudentDto> getAllStudentsByCourseId(Long courseId);
 
     List<StudentDto> getActiveStudentsByCourseId(Long courseId);

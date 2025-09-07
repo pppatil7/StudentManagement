@@ -34,6 +34,15 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<CourseDto> getAllCourses() {
+        List<Course> courses = courseRepository.findAll();
+        List<CourseDto> courseDtoList = courses.stream()
+                .map((course) -> modelMapper.map(course, CourseDto.class)).collect(Collectors.toList());
+
+        return courseDtoList;
+    }
+
+    @Override
     public List<StudentDto> getAllStudentsByCourseId(Long courseId) {
         if (!courseRepository.existsById(courseId)) {
             throw new ResourceNotFoundException("Course", "courseId", String.valueOf(courseId));

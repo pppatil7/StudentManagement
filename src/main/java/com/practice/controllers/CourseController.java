@@ -25,6 +25,12 @@ public class CourseController {
         return new ResponseEntity<>(courseDto, HttpStatus.CREATED);
     }
 
+    @GetMapping("courses")
+    public ResponseEntity<List<CourseDto>> getAllCourses() {
+        List<CourseDto> courseDtoList = courseService.getAllCourses();
+        return ResponseEntity.ok(courseDtoList);
+    }
+
     @GetMapping("courses/{courseId}/students")
     public ResponseEntity<List<StudentDto>> getAllStudentsByCourseId(@PathVariable Long courseId) {
         List<StudentDto> studentDtoList = courseService.getAllStudentsByCourseId(courseId);
