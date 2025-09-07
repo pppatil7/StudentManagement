@@ -35,7 +35,11 @@ public class GradeServiceImpl implements GradeService {
         if (!studentRepository.existsById(studentId)) {
             throw new ResourceNotFoundException("Student", "studentId", String.valueOf(studentId));
         }
+
         Enrollment enrollment = enrollmentRepository.findByStudentStudentIdAndIsActiveTrue(studentId);
+        if (gradeRepository.existsByEnrollmentEnrollmentIdAndCourseSemesterNumber(enrollment.getEnrollmentId(), dto.getCourseSemesterNumber())) {
+            throw new IllegalArgumentException("Grades stored Already");
+        }
         Grade grade = new Grade();
         grade.setCourseSemesterNumber(dto.getCourseSemesterNumber());
         grade.setAppearedSemesterName(dto.getAppearedSemesterName());
